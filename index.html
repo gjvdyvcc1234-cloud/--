@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f7dc"><title>KhaoNgu Explorer</title>
+<style>
+:root{--forest:#24783e;--leaf:#69a84d;--deep:#164b2b;--cream:#fffbe8;--pale:#f4f6d9;--gold:#f4c64e;--ink:#30472c;--muted:#718064;--line:#dce7c2}
+*{box-sizing:border-box}body{margin:0;background:#eef2d7;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+button{font:inherit;cursor:pointer;border:0}button:focus-visible{outline:3px solid #f2b834;outline-offset:2px}
+.app{max-width:500px;min-height:100dvh;margin:auto;background:linear-gradient(#f8f9e8,#eef4d5);position:relative;padding-bottom:86px;overflow:hidden}
+.status{height:26px;padding:5px 18px;font-size:10px;color:#63745b;display:flex;justify-content:space-between}
+.top{display:flex;align-items:center;justify-content:space-between;padding:12px 17px 8px}
+.brand{font-weight:900;font-size:17px;color:var(--forest);letter-spacing:-.5px}.brand small{display:block;font-size:10px;color:#8b9a6d;font-weight:600;letter-spacing:0}
+.iconbtn{width:36px;height:36px;border-radius:50%;background:#fffef1;color:var(--forest);box-shadow:0 2px 8px #6d8b3a18;font-size:20px}
+.screen{padding:8px 16px 20px;animation:fade .18s ease}@keyframes fade{from{opacity:.6;transform:translateY(4px)}to{opacity:1;transform:none}}
+.hero{border-radius:25px;min-height:300px;padding:23px 18px;position:relative;overflow:hidden;background:linear-gradient(180deg,#c8e9ef 0%,#eaf5cc 45%,#9bcf72 100%);box-shadow:0 5px 14px #527e3b24}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,#317c4566),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80') center/cover;opacity:.5}
+.hero>*{position:relative}.hero h1{font-size:33px;line-height:1.02;color:#287a3b;text-shadow:0 2px #fff;font-weight:1000;margin:8px 0}.hero p{font-size:13px;max-width:210px;font-weight:700}.turtle{position:absolute!important;right:7px;bottom:15px;font-size:92px;filter:drop-shadow(0 5px 4px #3b693333)}.speech{position:absolute!important;right:15px;bottom:117px;background:#fffde8;border:1px solid #e0e8bc;border-radius:17px;padding:9px 12px;font-size:11px;font-weight:800;max-width:125px}
+.primary{background:linear-gradient(#369749,#207a39);color:white;border-radius:24px;padding:12px 18px;font-weight:800;box-shadow:0 3px 0 #155d2b;font-size:13px}.secondary{background:#e8f1c9;color:var(--forest);border:1px solid #d5e3ad;border-radius:16px;padding:10px 13px;font-weight:800}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;margin:19px 2px 10px}.sectionhead h2{font-size:17px;margin:0}.sectionhead button{background:transparent;color:var(--forest);font-size:12px;font-weight:800}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.tile{background:#fffef2;border:1px solid var(--line);border-radius:19px;padding:10px;box-shadow:0 3px 10px #557a3210;text-align:left;color:var(--ink)}.tile .emoji{font-size:29px}.tile strong{display:block;font-size:13px;margin-top:4px}.tile small{font-size:10px;color:var(--muted)}
+.panel{background:#fffef1;border:1px solid var(--line);border-radius:21px;padding:15px;margin:10px 0;box-shadow:0 4px 12px #557a3210}
+.picture{height:145px;border-radius:17px;background:#cfe5ad center/cover;position:relative;overflow:hidden}.picture span{position:absolute;bottom:10px;left:10px;color:white;background:#1b5d37cc;border-radius:12px;padding:7px 10px;font-size:12px;font-weight:800}
+.placegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}.place{background:#f1f5d9;border-radius:14px;padding:8px;font-size:12px;font-weight:800}.place span{font-size:21px;display:block}
+.mapfake{height:210px;border-radius:18px;position:relative;overflow:hidden;background:linear-gradient(30deg,#c5e3a1 20%,#e4edb6 20% 40%,#a7d68a 40% 60%,#d7e8a8 60%);border:1px solid #d4e5ad}
+.mapfake:before{content:"";position:absolute;width:140%;height:12px;background:#fff7c8;top:52%;left:-20%;transform:rotate(-23deg);border:2px solid #c5d99a}
+.pin{position:absolute;background:#f3c443;border:3px solid white;border-radius:50% 50% 50% 0;width:27px;height:27px;transform:rotate(-45deg);box-shadow:0 2px 5px #567b3c55}.pin:after{content:"";width:6px;height:6px;background:#fff;border-radius:50%;position:absolute;top:7px;left:7px}
+.question{font-weight:850;font-size:17px;line-height:1.5}.answer{display:block;width:100%;text-align:left;background:#f5f6e3;border:1px solid #dce7c2;border-radius:14px;padding:12px;margin:8px 0;color:var(--ink)}.answer.chosen{background:#e1f2d3;border-color:#58a44c}.answer.correct{background:#e2f5d9;border-color:#5da34a}
+.progress{height:9px;background:#e4ebc9;border-radius:10px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,#9dcf3f,#f4c64e);border-radius:10px}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.badgeitem{text-align:center;background:#f2f5dc;border-radius:14px;padding:12px 5px;font-size:11px}.badgeitem b{font-size:28px;display:block}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(500px,100%);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 7px calc(8px + env(safe-area-inset-bottom));background:#fffef2;border-top:1px solid #dce7c2;z-index:5}
+.bottom button{background:transparent;color:#89947a;font-size:10px;padding:5px 0;display:flex;flex-direction:column;align-items:center;gap:3px}.bottom button span{font-size:20px}.bottom button.active{color:var(--forest);font-weight:900}.bottom button.active span{background:#e3f0cf;border-radius:12px;padding:3px 12px}
+.notice{font-size:11px;color:#7a896b;text-align:center;margin:12px}
+</style>
+</head>
+<body><div class="app">
+<div class="status"><span>9:41</span><span>● ▰ ▴ 100%</span></div>
+<div class="top"><button class="iconbtn" onclick="go('home')">‹</button><div class="brand">KhaoNgu Explorer<small>เปิดโลกการเรียนรู้ที่อุทยานเขางู</small></div><button class="iconbtn" onclick="go('profile')">⚙</button></div>
+<main id="screen" class="screen"></main>
+<nav class="bottom">
+<button data-page="home" class="active"><span>⌂</span>หน้าหลัก</button>
+<button data-page="explore"><span>⌖</span>สำรวจ</button>
+<button data-page="game"><span>🎮</span>เกม</button>
+<button data-page="collection"><span>🏆</span>สะสม</button>
+<button data-page="profile"><span>♟</span>โปรไฟล์</button>
+</nav></div>
+<script>
+let page='home',score=520,level=5,quizDone=false,missionDone=false,answer=-1;
+const places=[['ถ้ำฤาษี','🛕'],['ถ้ำจีน','⛰️'],['ถ้ำจาม','🪨'],['สะพานหิน','🌉']];
+function go(p){page=p;render()}
+function render(){
+document.querySelectorAll('.bottom button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+let s='';
+if(page==='home')s=`<section class="hero"><div style="font-size:12px;font-weight:900;color:#26783d">🌿 ยินดีต้อนรับนักสำรวจ</div><h1>KhaoNgu<br>Explorer</h1><p>เปิดโลกการเรียนรู้<br>ที่อุทยานเขางู</p><div class="speech">เที่ยวสนุก<br>เรียนรู้ได้ด้วย!</div><div class="turtle">🐢</div><button class="primary" onclick="go('explore')">เริ่มต้นสำรวจ ›</button></section>
+<div class="sectionhead"><h2>สำรวจเขางู</h2><button onclick="go('explore')">ดูทั้งหมด ›</button></div><div class="tiles"><button class="tile" onclick="go('explore')"><div class="emoji">🏞️</div><strong>สำรวจอุทยาน</strong><small>จุดสำคัญและเรื่องราว</small></button><button class="tile" onclick="go('map')"><div class="emoji">🗺️</div><strong>แผนที่เขางู</strong><small>ค้นหาจุดเรียนรู้</small></button><button class="tile" onclick="go('quiz')"><div class="emoji">🧠</div><strong>คำถามความรู้</strong><small>ตอบคำถามรับแต้ม</small></button><button class="tile" onclick="go('collection')"><div class="emoji">⭐</div><strong>คลังสะสม</strong><small>ปลดล็อกตัวละคร</small></button></div>
+<div class="panel"><div class="sectionhead"><h2>ความคืบหน้าของฉัน</h2><b>⭐ ${score}</b></div><div class="progress"><i style="width:52%"></i></div><p style="font-size:11px;color:var(--muted)">520 / 1,000 แต้มสู่เลเวลถัดไป</p></div>`;
+if(page==='explore')s=`<div class="sectionhead"><h2>สำรวจเขางู</h2><span>🍃</span></div><div class="panel"><div class="picture" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80')"><span>อุทยานหินเขางู · ราชบุรี</span></div><h2>อุทยานหินเขางู จังหวัดราชบุรี</h2><p style="font-size:13px">แหล่งท่องเที่ยวธรรมชาติที่มีภูเขาหินปูนและบรรยากาศร่มรื่น เรียนรู้เรื่องราวของพื้นที่ผ่านจุดสำคัญต่าง ๆ</p><button class="secondary" onclick="go('map')">ดูแผนที่และจุดสำคัญ ›</button></div><div class="sectionhead"><h2>จุดน่าสนใจในอุทยาน</h2></div><div class="placegrid">${places.map(x=>`<div class="place"><span>${x[1]}</span>${x[0]}　›</div>`).join('')}</div>`;
+if(page==='map')s=`<div class="sectionhead"><h2>แผนที่เขางู</h2><span>📍</span></div><div class="mapfake"><i class="pin" style="left:24%;top:32%"></i><i class="pin" style="left:67%;top:45%"></i><i class="pin" style="left:46%;top:70%"></i><i class="pin" style="left:80%;top:23%"></i></div><div class="panel"><h3>จุดเรียนรู้ใกล้คุณ</h3><p style="font-size:12px">แตะจุดหมุดเพื่อสำรวจสถานที่บนแผนที่จำลอง</p><div class="placegrid">${places.map(x=>`<div class="place">${x[1]} ${x[0]}</div>`).join('')}</div></div><div class="panel"><h3>ชมบรรยากาศ 360°</h3><p>ภาพจำลองมุมมองพาโนรามาของเขางู</p><button class="primary" onclick="go('panorama')">เปิดมุมมอง 360°</button></div>`;
+if(page==='panorama')s=`<div class="sectionhead"><h2>ชมแบบ 360°</h2><span>◉</span></div><div class="picture" style="height:260px;background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=80');display:grid;place-items:center"><span style="bottom:auto;left:auto;font-size:20px">360°</span></div><p style="text-align:center;font-size:12px">ตัวอย่างหน้าจอพาโนรามา — เชื่อมภาพ 360° จริงในขั้นตอนนำขึ้นเว็บ</p><button class="secondary" onclick="go('map')">กลับไปแผนที่</button>`;
+if(page==='game')s=`<div class="sectionhead"><h2>เกมพิชิตเขางู</h2><span>🏆</span></div><div class="panel" style="text-align:center"><div style="font-size:78px">🥚</div><h2>ภารกิจนักสำรวจ</h2><p>ทำภารกิจเพื่อสะสมแต้มและปลดล็อกของรางวัล</p><div class="progress"><i style="width:${missionDone?100:40}%"></i></div><p style="font-size:12px">${missionDone?'ภารกิจสำเร็จแล้ว':'2 / 5 ภารกิจ'}</p><button class="primary" onclick="missionDone=true;score+=10;render()"> ${missionDone?'รับแต้มแล้ว ✓':'ทำภารกิจสำเร็จ +10 แต้ม'} </button></div><div class="panel"><h3>ภารกิจวันนี้</h3><p style="font-size:13px">สังเกตธรรมชาติรอบตัวและเลือกสิ่งหนึ่งที่อยากเรียนรู้</p></div>`;
+if(page==='quiz')s=`<div class="sectionhead"><h2>แบบทดสอบความรู้</h2><span>🏆</span></div><div class="panel"><div class="pill" style="font-size:11px;color:var(--forest)">คำถาม 1 / 1</div><div class="picture" style="margin:12px 0;background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ee3?auto=format&fit=crop&w=900&q=80')"></div><p class="question">เขางูตั้งอยู่ที่จังหวัดใด?</p>${['กาญจนบุรี','ราชบุรี','เพชรบุรี'].map((x,i)=>`<button class="answer ${answer===i?'chosen':''} ${quizDone&&i===1?'correct':''}" onclick="answer=${i};render()">${i===1?'✓　':'○　'}${x}</button>`).join('')}<button class="primary" onclick="if(answer===1&&!quizDone){quizDone=true;score+=5}render()">${quizDone?'ตอบถูกต้อง! +5 แต้ม':'ส่งคำตอบ'}</button>${quizDone?'<p style="color:var(--forest);font-weight:800">เก่งมาก! รับ 5 แต้มแล้ว 🌟</p>':''}</div>`;
+if(page==='collection')s=`<div class="sectionhead"><h2>คลังสะสม</h2><span>⭐</span></div><div class="panel"><h3>สะสมความรู้ รับตัวละครพิเศษ!</h3><div class="progress"><i style="width:35%"></i></div><p style="font-size:11px">3 / 10 ตัวละคร</p><div class="tiles">${[['🐢','นักสำรวจ'],['🦫','ผู้ดูแล'],['🐸','ผู้พิทักษ์'],['🥚','ไข่ลึกลับ']].map((x,i)=>`<div class="tile" style="text-align:center"><div class="emoji">${i<2?x[0]:'🔒'}</div><strong>${x[1]}</strong><small>${i<2?'ปลดล็อกแล้ว':'ล็อกอยู่'}</small></div>`).join('')}</div></div>`;
+if(page==='profile')s=`<div class="sectionhead"><h2>โปรไฟล์ของฉัน</h2><span>⚙</span></div><div class="panel" style="text-align:center"><div style="font-size:70px">🐢</div><h2>นักสำรวจเขางู</h2><b>Lv. ${level}</b><div class="progress" style="margin:10px 0"><i style="width:52%"></i></div><p style="font-size:12px">520 / 1,000</p><div class="tiles"><div class="tile"><strong>⭐ ${score}</strong><small>คะแนนรวม</small></div><div class="tile"><strong>🏆 12</strong><small>ภารกิจสำเร็จ</small></div></div></div><div class="panel"><h3>ความสำเร็จของฉัน</h3><div class="badges"><div class="badgeitem"><b>🥇</b>นักเรียนรู้</div><div class="badgeitem"><b>🧭</b>นักสำรวจ</div><div class="badgeitem"><b>🌿</b>ผู้พิทักษ์</div></div></div>`;
+document.getElementById('screen').innerHTML=s;
+}
+document.querySelectorAll('.bottom button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+render();
+</script></body></html>
